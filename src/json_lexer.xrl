@@ -1,0 +1,34 @@
+Definitions.
+
+% <Macro Definitions>
+STRING        = "([^"\\]|\\(["\\\/bfnrt]|u[0-9a-fA-F]{4}))*"
+INTEGER       = -?(0|[1-9]\d*)
+FLOAT         = -?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?
+BOOLEAN       = (true|false)
+NULL          = null
+WHITESPACE    = [\s\t\n\r]
+START_OBJECT  = \{
+START_ARRAY   = \[
+END_OBJECT    = \}
+END_ARRAY     = \]
+COLON         = \:
+COMMA         = \,
+
+Rules.
+
+% <Token Rules>
+{STRING}        : {token, {string, TokenLine, list_to_binary(TokenChars)}}.
+{INTEGER}       : {token, {int, TokenLine, list_to_integer(TokenChars)}}.
+{FLOAT}         : {token, {float, TokenLine, list_to_float(TokenChars)}}.
+{BOOLEAN}       : {token, {bool, TokenLine, list_to_atom(TokenChars)}}.
+{NULL}          : {token, {nil, TokenLine, nil}}.
+{COLON}         : {token, {colon, TokenLine, TokenChars}}.
+{COMMA}         : {token, {comma, TokenLine, TokenChars}}.
+{START_OBJECT}  : {token, {start_obj, TokenLine, TokenChars}}.
+{START_ARRAY}   : {token, {start_arr, TokenLine, TokenChars}}.
+{END_OBJECT}    : {token, {end_obj, TokenLine, TokenChars}}.
+{END_ARRAY}     : {token, {end_arr, TokenLine, TokenChars}}.
+{WHITESPACE}    : skip_token.
+
+Erlang code.
+% <Erlang Code>
