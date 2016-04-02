@@ -12,7 +12,7 @@
 -export([format_error/1]).
 
 %% User code. This is placed here to allow extra attributes.
--file("./src/json_lexer.xrl", 33).
+-file("src/json_lexer.xrl", 33).
 % <Erlang Code>
 
 -file("/usr/lib/erlang/lib/parsetools-2.1.1/include/leexinc.hrl", 14).
@@ -283,7 +283,7 @@ yysuf(List, N) -> lists:nthtail(N, List).
 %% return signal either an unrecognised character or end of current
 %% input.
 
--file("./src/json_lexer.erl", 285).
+-file("src/json_lexer.erl", 285).
 yystate() -> 26.
 
 yystate(33, [108|Ics], Line, Tlen, Action, Alen) ->
@@ -530,62 +530,62 @@ yyaction(11, _, _, _) ->
 yyaction(_, _, _, _) -> error.
 
 -compile({inline,yyaction_0/2}).
--file("./src/json_lexer.xrl", 18).
+-file("src/json_lexer.xrl", 18).
 yyaction_0(TokenChars, TokenLine) ->
      { token, { string, TokenLine, list_to_binary (TokenChars) } } .
 
 -compile({inline,yyaction_1/2}).
--file("./src/json_lexer.xrl", 19).
+-file("src/json_lexer.xrl", 19).
 yyaction_1(TokenChars, TokenLine) ->
      { token, { int, TokenLine, list_to_integer (TokenChars) } } .
 
 -compile({inline,yyaction_2/2}).
--file("./src/json_lexer.xrl", 20).
+-file("src/json_lexer.xrl", 20).
 yyaction_2(TokenChars, TokenLine) ->
      { token, { float, TokenLine, list_to_float (TokenChars) } } .
 
 -compile({inline,yyaction_3/2}).
--file("./src/json_lexer.xrl", 21).
+-file("src/json_lexer.xrl", 21).
 yyaction_3(TokenChars, TokenLine) ->
      { token, { bool, TokenLine, list_to_atom (TokenChars) } } .
 
 -compile({inline,yyaction_4/1}).
--file("./src/json_lexer.xrl", 22).
+-file("src/json_lexer.xrl", 22).
 yyaction_4(TokenLine) ->
      { token, { nil, TokenLine, nil } } .
 
 -compile({inline,yyaction_5/2}).
--file("./src/json_lexer.xrl", 23).
+-file("src/json_lexer.xrl", 23).
 yyaction_5(TokenChars, TokenLine) ->
      { token, { colon, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_6/2}).
--file("./src/json_lexer.xrl", 24).
+-file("src/json_lexer.xrl", 24).
 yyaction_6(TokenChars, TokenLine) ->
      { token, { comma, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_7/2}).
--file("./src/json_lexer.xrl", 25).
+-file("src/json_lexer.xrl", 25).
 yyaction_7(TokenChars, TokenLine) ->
      { token, { start_obj, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_8/2}).
--file("./src/json_lexer.xrl", 26).
+-file("src/json_lexer.xrl", 26).
 yyaction_8(TokenChars, TokenLine) ->
      { token, { start_arr, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_9/2}).
--file("./src/json_lexer.xrl", 27).
+-file("src/json_lexer.xrl", 27).
 yyaction_9(TokenChars, TokenLine) ->
      { token, { end_obj, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_10/2}).
--file("./src/json_lexer.xrl", 28).
+-file("src/json_lexer.xrl", 28).
 yyaction_10(TokenChars, TokenLine) ->
      { token, { end_arr, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_11/0}).
--file("./src/json_lexer.xrl", 29).
+-file("src/json_lexer.xrl", 29).
 yyaction_11() ->
      skip_token .
 
