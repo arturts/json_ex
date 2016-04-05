@@ -6,3 +6,4 @@ erl_crash.dump
 *.swp
 *.old
 *.beam
+tags
