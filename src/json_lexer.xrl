@@ -2,8 +2,9 @@ Definitions.
 
 % <Macro Definitions>
 STRING        = "([^"\\]|\\(["\\\/bfnrt]|u[0-9a-fA-F]{4}))*"
-INTEGER       = -?(0|[1-9]\d*)
-FLOAT         = -?(0|[1-9]\d*)(\.\d+)?([eE][+-]?\d+)?
+D             = [0-9]
+INTEGER       = -?{D}+
+FLOAT         = -?{D}(\.{D}+)?([eE][+-]?{D}+)?
 BOOLEAN       = (true|false)
 NULL          = null
 WHITESPACE    = [\s\t\n\r]

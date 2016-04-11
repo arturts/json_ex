@@ -12,7 +12,7 @@
 -export([format_error/1]).
 
 %% User code. This is placed here to allow extra attributes.
--file("src/json_lexer.xrl", 33).
+-file("src/json_lexer.xrl", 34).
 % <Erlang Code>
 
 -file("/usr/lib/erlang/lib/parsetools-2.1.1/include/leexinc.hrl", 14).
@@ -292,9 +292,7 @@ yystate(33, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,33};
 yystate(32, Ics, Line, Tlen, _, _) ->
     {5,Tlen,Ics,Line};
-yystate(31, [48|Ics], Line, Tlen, Action, Alen) ->
-    yystate(23, Ics, Line, Tlen+1, Action, Alen);
-yystate(31, [C|Ics], Line, Tlen, Action, Alen) when C >= 49, C =< 57 ->
+yystate(31, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
     yystate(24, Ics, Line, Tlen+1, Action, Alen);
 yystate(31, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,31};
@@ -324,8 +322,6 @@ yystate(26, [91|Ics], Line, Tlen, Action, Alen) ->
     yystate(28, Ics, Line, Tlen+1, Action, Alen);
 yystate(26, [58|Ics], Line, Tlen, Action, Alen) ->
     yystate(32, Ics, Line, Tlen+1, Action, Alen);
-yystate(26, [48|Ics], Line, Tlen, Action, Alen) ->
-    yystate(23, Ics, Line, Tlen+1, Action, Alen);
 yystate(26, [45|Ics], Line, Tlen, Action, Alen) ->
     yystate(31, Ics, Line, Tlen+1, Action, Alen);
 yystate(26, [44|Ics], Line, Tlen, Action, Alen) ->
@@ -340,7 +336,7 @@ yystate(26, [9|Ics], Line, Tlen, Action, Alen) ->
     yystate(30, Ics, Line, Tlen+1, Action, Alen);
 yystate(26, [10|Ics], Line, Tlen, Action, Alen) ->
     yystate(30, Ics, Line+1, Tlen+1, Action, Alen);
-yystate(26, [C|Ics], Line, Tlen, Action, Alen) when C >= 49, C =< 57 ->
+yystate(26, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
     yystate(24, Ics, Line, Tlen+1, Action, Alen);
 yystate(26, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,26};
@@ -348,24 +344,24 @@ yystate(25, [117|Ics], Line, Tlen, Action, Alen) ->
     yystate(33, Ics, Line, Tlen+1, Action, Alen);
 yystate(25, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,25};
-yystate(24, [127|Ics], Line, Tlen, _, _) ->
-    yystate(24, Ics, Line, Tlen+1, 1, Tlen);
 yystate(24, [101|Ics], Line, Tlen, _, _) ->
     yystate(16, Ics, Line, Tlen+1, 1, Tlen);
 yystate(24, [69|Ics], Line, Tlen, _, _) ->
     yystate(16, Ics, Line, Tlen+1, 1, Tlen);
 yystate(24, [46|Ics], Line, Tlen, _, _) ->
+    yystate(15, Ics, Line, Tlen+1, 1, Tlen);
+yystate(24, [C|Ics], Line, Tlen, _, _) when C >= 48, C =< 57 ->
     yystate(7, Ics, Line, Tlen+1, 1, Tlen);
 yystate(24, Ics, Line, Tlen, _, _) ->
     {1,Tlen,Ics,Line,24};
 yystate(23, [101|Ics], Line, Tlen, _, _) ->
-    yystate(16, Ics, Line, Tlen+1, 1, Tlen);
+    yystate(16, Ics, Line, Tlen+1, 2, Tlen);
 yystate(23, [69|Ics], Line, Tlen, _, _) ->
-    yystate(16, Ics, Line, Tlen+1, 1, Tlen);
-yystate(23, [46|Ics], Line, Tlen, _, _) ->
-    yystate(7, Ics, Line, Tlen+1, 1, Tlen);
+    yystate(16, Ics, Line, Tlen+1, 2, Tlen);
+yystate(23, [C|Ics], Line, Tlen, _, _) when C >= 48, C =< 57 ->
+    yystate(23, Ics, Line, Tlen+1, 2, Tlen);
 yystate(23, Ics, Line, Tlen, _, _) ->
-    {1,Tlen,Ics,Line,23};
+    {2,Tlen,Ics,Line,23};
 yystate(22, [92|Ics], Line, Tlen, Action, Alen) ->
     yystate(21, Ics, Line, Tlen+1, Action, Alen);
 yystate(22, [34|Ics], Line, Tlen, Action, Alen) ->
@@ -410,22 +406,18 @@ yystate(18, Ics, Line, Tlen, _, _) ->
     {9,Tlen,Ics,Line};
 yystate(17, Ics, Line, Tlen, _, _) ->
     {3,Tlen,Ics,Line};
-yystate(16, [127|Ics], Line, Tlen, Action, Alen) ->
-    yystate(8, Ics, Line, Tlen+1, Action, Alen);
 yystate(16, [45|Ics], Line, Tlen, Action, Alen) ->
     yystate(0, Ics, Line, Tlen+1, Action, Alen);
 yystate(16, [43|Ics], Line, Tlen, Action, Alen) ->
     yystate(0, Ics, Line, Tlen+1, Action, Alen);
+yystate(16, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
+    yystate(8, Ics, Line, Tlen+1, Action, Alen);
 yystate(16, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,16};
-yystate(15, [127|Ics], Line, Tlen, _, _) ->
-    yystate(15, Ics, Line, Tlen+1, 2, Tlen);
-yystate(15, [101|Ics], Line, Tlen, _, _) ->
-    yystate(16, Ics, Line, Tlen+1, 2, Tlen);
-yystate(15, [69|Ics], Line, Tlen, _, _) ->
-    yystate(16, Ics, Line, Tlen+1, 2, Tlen);
-yystate(15, Ics, Line, Tlen, _, _) ->
-    {2,Tlen,Ics,Line,15};
+yystate(15, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
+    yystate(23, Ics, Line, Tlen+1, Action, Alen);
+yystate(15, Ics, Line, Tlen, Action, Alen) ->
+    {Action,Alen,Tlen,Ics,Line,15};
 yystate(14, Ics, Line, Tlen, _, _) ->
     {0,Tlen,Ics,Line};
 yystate(13, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
@@ -450,14 +442,14 @@ yystate(9, [123|Ics], Line, Tlen, Action, Alen) ->
     yystate(1, Ics, Line, Tlen+1, Action, Alen);
 yystate(9, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,9};
-yystate(8, [127|Ics], Line, Tlen, _, _) ->
+yystate(8, [C|Ics], Line, Tlen, _, _) when C >= 48, C =< 57 ->
     yystate(8, Ics, Line, Tlen+1, 2, Tlen);
 yystate(8, Ics, Line, Tlen, _, _) ->
     {2,Tlen,Ics,Line,8};
-yystate(7, [127|Ics], Line, Tlen, Action, Alen) ->
-    yystate(15, Ics, Line, Tlen+1, Action, Alen);
-yystate(7, Ics, Line, Tlen, Action, Alen) ->
-    {Action,Alen,Tlen,Ics,Line,7};
+yystate(7, [C|Ics], Line, Tlen, _, _) when C >= 48, C =< 57 ->
+    yystate(7, Ics, Line, Tlen+1, 1, Tlen);
+yystate(7, Ics, Line, Tlen, _, _) ->
+    {1,Tlen,Ics,Line,7};
 yystate(6, [125|Ics], Line, Tlen, Action, Alen) ->
     yystate(22, Ics, Line, Tlen+1, Action, Alen);
 yystate(6, Ics, Line, Tlen, Action, Alen) ->
@@ -482,7 +474,7 @@ yystate(1, [52|Ics], Line, Tlen, Action, Alen) ->
     yystate(6, Ics, Line, Tlen+1, Action, Alen);
 yystate(1, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,1};
-yystate(0, [127|Ics], Line, Tlen, Action, Alen) ->
+yystate(0, [C|Ics], Line, Tlen, Action, Alen) when C >= 48, C =< 57 ->
     yystate(8, Ics, Line, Tlen+1, Action, Alen);
 yystate(0, Ics, Line, Tlen, Action, Alen) ->
     {Action,Alen,Tlen,Ics,Line,0};
@@ -530,62 +522,62 @@ yyaction(11, _, _, _) ->
 yyaction(_, _, _, _) -> error.
 
 -compile({inline,yyaction_0/2}).
--file("src/json_lexer.xrl", 18).
+-file("src/json_lexer.xrl", 19).
 yyaction_0(TokenChars, TokenLine) ->
      { token, { string, TokenLine, list_to_binary (TokenChars) } } .
 
 -compile({inline,yyaction_1/2}).
--file("src/json_lexer.xrl", 19).
+-file("src/json_lexer.xrl", 20).
 yyaction_1(TokenChars, TokenLine) ->
      { token, { int, TokenLine, list_to_integer (TokenChars) } } .
 
 -compile({inline,yyaction_2/2}).
--file("src/json_lexer.xrl", 20).
+-file("src/json_lexer.xrl", 21).
 yyaction_2(TokenChars, TokenLine) ->
      { token, { float, TokenLine, list_to_float (TokenChars) } } .
 
 -compile({inline,yyaction_3/2}).
--file("src/json_lexer.xrl", 21).
+-file("src/json_lexer.xrl", 22).
 yyaction_3(TokenChars, TokenLine) ->
      { token, { bool, TokenLine, list_to_atom (TokenChars) } } .
 
 -compile({inline,yyaction_4/1}).
--file("src/json_lexer.xrl", 22).
+-file("src/json_lexer.xrl", 23).
 yyaction_4(TokenLine) ->
      { token, { nil, TokenLine, nil } } .
 
 -compile({inline,yyaction_5/2}).
--file("src/json_lexer.xrl", 23).
+-file("src/json_lexer.xrl", 24).
 yyaction_5(TokenChars, TokenLine) ->
      { token, { colon, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_6/2}).
--file("src/json_lexer.xrl", 24).
+-file("src/json_lexer.xrl", 25).
 yyaction_6(TokenChars, TokenLine) ->
      { token, { comma, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_7/2}).
--file("src/json_lexer.xrl", 25).
+-file("src/json_lexer.xrl", 26).
 yyaction_7(TokenChars, TokenLine) ->
      { token, { start_obj, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_8/2}).
--file("src/json_lexer.xrl", 26).
+-file("src/json_lexer.xrl", 27).
 yyaction_8(TokenChars, TokenLine) ->
      { token, { start_arr, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_9/2}).
--file("src/json_lexer.xrl", 27).
+-file("src/json_lexer.xrl", 28).
 yyaction_9(TokenChars, TokenLine) ->
      { token, { end_obj, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_10/2}).
--file("src/json_lexer.xrl", 28).
+-file("src/json_lexer.xrl", 29).
 yyaction_10(TokenChars, TokenLine) ->
      { token, { end_arr, TokenLine, TokenChars } } .
 
 -compile({inline,yyaction_11/0}).
--file("src/json_lexer.xrl", 29).
+-file("src/json_lexer.xrl", 30).
 yyaction_11() ->
      skip_token .
 
