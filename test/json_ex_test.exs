@@ -20,6 +20,9 @@ defmodule JsonExTest do
     {:ok, [token|_], _} = "null" |> to_char_list |> :json_lexer.string
     assert {:nil, 1, nil} == token
 
+    {:ok, [token|_], _} = "true" |> to_char_list |> :json_lexer.string
+    assert {:bool, 1, true} == token
+
     {:ok, [token|_], _} = "1" |> to_char_list |> :json_lexer.string
     assert {:int, 1, 1} == token
 
@@ -31,14 +34,16 @@ defmodule JsonExTest do
 
     {:ok, [token|_], _} = "1.5" |> to_char_list |> :json_lexer.string
     assert {:float, 1, 1.5} == token
+  end
 
+  test "lexer returns correct values for lists and objects" do
     {:ok, tokens, _} = "[1, 2]" |> to_char_list |> :json_lexer.string
     assert [{:start_arr, 1, '['}, {:int, 1, 1}, {:comma, 1, ','}, {:int, 1, 2},
-      {:comma, 1, ','}, {:end_arr, 1, ']'}]
+      {:end_arr, 1, ']'}] == tokens
 
     {:ok, tokens, _} = "{\"key\": \"value\"}" |> to_char_list |> :json_lexer.string
     assert [{:start_obj, 1, '{'}, {:string, 1, "key"}, {:colon, 1, ':'},
-      {:string, 1, "value"}, {:end_obj}]
+      {:string, 1, "value"}, {:end_obj, 1, '}'}] == tokens
   end
 
   test "parses json correctly" do
