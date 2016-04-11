@@ -262,16 +262,19 @@ yeccpars2_1(_, _, _, _, T, _, _) ->
  yeccerror(T).
 
 yeccpars2_2(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
- yeccgoto_value(hd(Ss), Cat, Ss, Stack, T, Ts, Tzr).
+ NewStack = yeccpars2_2_(Stack),
+ yeccgoto_value(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
 
 yeccpars2_3(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
- yeccgoto_value(hd(Ss), Cat, Ss, Stack, T, Ts, Tzr).
+ NewStack = yeccpars2_3_(Stack),
+ yeccgoto_value(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
 
 yeccpars2_4(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccgoto_scalar(hd(Ss), Cat, Ss, Stack, T, Ts, Tzr).
 
 yeccpars2_5(_S, Cat, Ss, Stack, T, Ts, Tzr) ->
- yeccgoto_value(hd(Ss), Cat, Ss, Stack, T, Ts, Tzr).
+ NewStack = yeccpars2_5_(Stack),
+ yeccgoto_value(hd(Ss), Cat, Ss, NewStack, T, Ts, Tzr).
 
 yeccpars2_6(S, ']', Ss, Stack, T, Ts, Tzr) ->
  yeccpars1(S, 23, Ss, Stack, T, Ts, Tzr);
@@ -429,6 +432,30 @@ yeccgoto_values(6, Cat, Ss, Stack, T, Ts, Tzr) ->
 yeccgoto_values(24=_S, Cat, Ss, Stack, T, Ts, Tzr) ->
  yeccpars2_25(_S, Cat, Ss, Stack, T, Ts, Tzr).
 
+-compile({inline,yeccpars2_2_/1}).
+-file("src/json_parser.yrl", 0).
+yeccpars2_2_(__Stack0) ->
+ [__1 | __Stack] = __Stack0,
+ [begin
+   '$undefined'
+  end | __Stack].
+
+-compile({inline,yeccpars2_3_/1}).
+-file("src/json_parser.yrl", 0).
+yeccpars2_3_(__Stack0) ->
+ [__1 | __Stack] = __Stack0,
+ [begin
+   '$undefined'
+  end | __Stack].
+
+-compile({inline,yeccpars2_5_/1}).
+-file("src/json_parser.yrl", 0).
+yeccpars2_5_(__Stack0) ->
+ [__1 | __Stack] = __Stack0,
+ [begin
+   '$undefined'
+  end | __Stack].
+
 -compile({inline,yeccpars2_7_/1}).
 -file("src/json_parser.yrl", 31).
 yeccpars2_7_(__Stack0) ->
@@ -450,7 +477,7 @@ yeccpars2_8_(__Stack0) ->
 yeccpars2_9_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
-   list_to_float ( token_value ( __1 ) )
+   token_value ( __1 )
   end | __Stack].
 
 -compile({inline,yeccpars2_10_/1}).
@@ -458,7 +485,7 @@ yeccpars2_9_(__Stack0) ->
 yeccpars2_10_(__Stack0) ->
  [__1 | __Stack] = __Stack0,
  [begin
-   list_to_binary ( token_value ( __1 ) )
+   token_value ( __1 )
   end | __Stack].
 
 -compile({inline,yeccpars2_11_/1}).
@@ -482,7 +509,7 @@ yeccpars2_17_(__Stack0) ->
 yeccpars2_19_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
-   maps : merge ( __1 , __2 )
+   maps : merge ( __1 , __3 )
   end | __Stack].
 
 -compile({inline,yeccpars2_20_/1}).
@@ -514,7 +541,7 @@ yeccpars2_23_(__Stack0) ->
 yeccpars2_25_(__Stack0) ->
  [__3,__2,__1 | __Stack] = __Stack0,
  [begin
-   [ __1 | __2 ]
+   [ __1 | __3 ]
   end | __Stack].
 
 -compile({inline,yeccpars2_26_/1}).

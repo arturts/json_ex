@@ -11,11 +11,11 @@ Rootsymbol
 value.
 
 %%%% GRAMMAR RULES
-value   -> scalar           : '$1'.
-value   -> object           : '$1'.
-value   -> array            : '$1'.
+value   -> scalar.
+value   -> object.
+value   -> array.
 
-values  -> value ',' values : [ '$1' | '$2' ].
+values  -> value ',' values : [ '$1' | '$3' ].
 values  -> value            : [ '$1' ].
 
 object  -> '{' pairs '}'    : '$2'.
@@ -25,12 +25,12 @@ array   -> '[' values ']'   : '$2'.
 
 pair    -> string ':' value : #{ '$1' => '$3' }.
 pairs   -> pair             : '$1'.
-pairs   -> pair ',' pairs   : maps:merge('$1', '$2').
+pairs   -> pair ',' pairs   : maps:merge('$1', '$3').
 
-scalar  -> string           : list_to_binary(token_value('$1')).
+scalar  -> string           : token_value('$1').
 scalar  -> literal          : '$1'.
 
-literal -> number           : list_to_float(token_value('$1')).
+literal -> number           : token_value('$1').
 literal -> 'true'           : true.
 literal -> 'false'          : false.
 literal -> 'null'           : nil.
