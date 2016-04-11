@@ -18,7 +18,7 @@ COMMA         = \,
 Rules.
 
 % <Token Rules>
-{STRING}        : {token, {string, TokenLine, list_to_binary(TokenChars)}}.
+{STRING}        : {token, {string, TokenLine, list_to_binary(strip_double_quotes(TokenChars))}}.
 {INTEGER}       : {token, {int, TokenLine, list_to_integer(TokenChars)}}.
 {FLOAT}         : {token, {float, TokenLine, list_to_float(TokenChars)}}.
 {BOOLEAN}       : {token, {bool, TokenLine, list_to_atom(TokenChars)}}.
@@ -33,3 +33,4 @@ Rules.
 
 Erlang code.
 % <Erlang Code>
+strip_double_quotes(String) -> string:strip(String, both, $\").

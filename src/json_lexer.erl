@@ -14,6 +14,7 @@
 %% User code. This is placed here to allow extra attributes.
 -file("src/json_lexer.xrl", 34).
 % <Erlang Code>
+strip_double_quotes(String) -> string:strip(String, both, $\").
 
 -file("/usr/lib/erlang/lib/parsetools-2.1.1/include/leexinc.hrl", 14).
 
@@ -283,7 +284,7 @@ yysuf(List, N) -> lists:nthtail(N, List).
 %% return signal either an unrecognised character or end of current
 %% input.
 
--file("src/json_lexer.erl", 285).
+-file("src/json_lexer.erl", 286).
 yystate() -> 26.
 
 yystate(33, [108|Ics], Line, Tlen, Action, Alen) ->
@@ -524,7 +525,7 @@ yyaction(_, _, _, _) -> error.
 -compile({inline,yyaction_0/2}).
 -file("src/json_lexer.xrl", 19).
 yyaction_0(TokenChars, TokenLine) ->
-     { token, { string, TokenLine, list_to_binary (TokenChars) } } .
+     { token, { string, TokenLine, list_to_binary (strip_double_quotes (TokenChars)) } } .
 
 -compile({inline,yyaction_1/2}).
 -file("src/json_lexer.xrl", 20).

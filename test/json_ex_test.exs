@@ -4,7 +4,7 @@ defmodule JsonExTest do
 
   test "lexer returns correct single token" do
     {:ok, [token|_], _} = "\"hello\"" |> to_char_list |> :json_lexer.string
-    assert {:string, 1, "\"hello\""} == token
+    assert {:string, 1, "hello"} == token
 
     {:ok, [token|_], _} = "true" |> to_char_list |> :json_lexer.string
     assert {:bool, 1, true} == token
@@ -31,6 +31,14 @@ defmodule JsonExTest do
 
     {:ok, [token|_], _} = "1.5" |> to_char_list |> :json_lexer.string
     assert {:float, 1, 1.5} == token
+
+    {:ok, tokens, _} = "[1, 2]" |> to_char_list |> :json_lexer.string
+    assert [{:start_arr, 1, '['}, {:int, 1, 1}, {:comma, 1, ','}, {:int, 1, 2},
+      {:comma, 1, ','}, {:end_arr, 1, ']'}]
+
+    {:ok, tokens, _} = "{\"key\": \"value\"}" |> to_char_list |> :json_lexer.string
+    assert [{:start_obj, 1, '{'}, {:string, 1, "key"}, {:colon, 1, ':'},
+      {:string, 1, "value"}, {:end_obj}]
   end
 
   test "parses json correctly" do
@@ -40,10 +48,10 @@ defmodule JsonExTest do
     assert JsonEx.parse "[1, 2, 3]" == [1, 2, 3]
     complex = """
     {
-      \"key\": [1.1, 2.2],
-      \"another\": {
-        \"abc\": true
-      }
+    \"key\": [1.1, 2.2],
+    \"another\": {
+    \"abc\": true
+    }
     }
     """
     assert JsonEx.parse complex == %{"key" => [1.1, 2.2], "another" => %{"abc" => true}}
